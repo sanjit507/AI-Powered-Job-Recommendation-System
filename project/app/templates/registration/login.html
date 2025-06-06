@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center badge-primary">
+                    <div class="card-title text-warning"><h5>Login</h5></div>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_username">Username:</label>
+                            <input type="text" name="username" class="form-control" id="id_username" required>
+                            {% if form.username.errors %}
+                                <small class="text-danger">{{ form.username.errors }}</small>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password">Password:</label>
+                            <input type="password" name="password" class="form-control" id="id_password" required>
+                            {% if form.password.errors %}
+                                <small class="text-danger">{{ form.password.errors }}</small>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                    </form>
+
+                    <!-- Google Login -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-block">
+                            <i class="fab fa-google"></i> Login with Google
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <small>Don't have an account? <a href="{% url 'register' %}">Register here</a></small>
+                </div>
+
+                <a href="{% url 'company_login' %}" class="btn btn-outline-secondary w-100 mt-3">Login as Recruiter</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

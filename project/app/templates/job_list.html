@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Job Listings
+{% endblock %}
+
+{% block content %}
+
+
+<br>
+
+
+<div class="announcement1">
+  ✨ Get ready for AI Mock Interviews & AI Resume Builder
+</div>
+
+            <!-- Search Bar -->
+            <div class="search-bar position-relative">
+                <form method="GET" action="{% url 'job_list' %}">
+                    <input type="text" name="q" placeholder="Search jobs by title, location, or keyword..." value="{{ request.GET.q }}">
+                    <i class="fas fa-search search-icon"></i>
+                </form>
+            </div>
+        </div>
+
+        <!-- Image Slider -->
+        <section class="team">
+            <div class="swiper team-slider">
+              <div class="swiper-wrapper">
+                
+                <div class="swiper-slide slide">
+                  <div class="image">
+                    <img src="{% static 'images/123.png' %}" alt="Sanjit">
+                    <div class="share">
+                     
+                    </div>
+                  </div>
+                  <div class="content">
+                  </div>
+                </div> 
+        
+                <!-- Team Member 2 -->
+                <div class="swiper-slide slide">
+                  <div class="image">
+                    <img src="{% static 'images/re.jpg' %}" alt="Hemant">
+                    <div class="share">
+                    </div>
+                  </div>
+                </div>
+        
+                <!-- Team Member 3 -->
+                <div class="swiper-slide slide">
+                  <div class="image">
+                    <img src="{% static 'images/banner-img.png' %}" alt="Ayaz">
+                    <div class="share">
+                    </div>
+                  </div>
+                </div>
+        
+                <!-- Team Member 4 -->
+                <div class="swiper-slide slide">
+                  <div class="image">
+                    <img src="{% static 'images/ai.jpg' %}" alt="Vikram">
+                    <div class="share">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Swiper Navigation -->
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            </div>
+          </section>
+        
+          <!-- Swiper JS -->
+          <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+          <!-- Initialize Swiper -->
+          <script>
+            var swiper = new Swiper(".team-slider", {
+              loop: true,
+              grabCursor: true,
+              spaceBetween: 20,
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+              autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+              },
+              breakpoints: {
+                0: {
+                  slidesPerView: 1,
+                },
+                768: {
+                  slidesPerView: 2,
+                },
+                991: {
+                  slidesPerView: 3,
+                },
+              },
+            });
+          </script>
+    </div>
+
+    <div class="announcement1">
+      <br> <br>
+      📢 Unlock Your Job – Create an Account and Get Personalized Recommendations Today!
+  </div>
+  <section>
+    <h2 class="animated-title12">Exciting Career Opportunities Just for You </h2>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <!-- 
+               Menu (Filters + User Guide) -->
+            <div class="col-md-3">
+                <div class="side-menu mb-4">
+                    <h5>Filter Jobs</h5>
+                    <form method="GET" action="{% url 'job_list' %}">
+                        <!-- Location Filter -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <select name="location" id="location" class="form-select">
+                                <option value="">All Locations</option>
+                                {% for location in locations %}
+                                    <option value="{{ location }}" {% if request.GET.location == location %}selected{% endif %}>{{ location }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <!-- Category Filter -->
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select name="category" id="category" class="form-select">
+                                <option value="">All Categories</option>
+                                {% for category in categories %}
+                                    <option value="{{ category }}" {% if request.GET.category == category %}selected{% endif %}>{{ category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <!-- Salary Filter -->
+                        <div class="mb-3">
+                            <label for="salary" class="form-label">Salary</label>
+                            <select name="salary" id="salary" class="form-select">
+                                <option value="">All Salaries</option>
+                                {% for salary in salaries %}
+                                    <option value="{{ salary }}" {% if request.GET.salary == salary|stringformat:"s" %}selected{% endif %}>{{ salary }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                    </form>
+                </div>
+    
+                <!-- User Guide -->
+                <div class="side-menu">
+                    <h5>Recommendation system features Guide</h5>
+                    <p>Here's how it works:</p>
+                    <hr>
+                    <p>If you create account then you applicable for benefits</p>
+                    <ul>
+                        <li>Job Apply and Recommendation features</li>
+                    </ul>
+                    <hr>
+                    <p>If you complete profile setup then you applicable to according to your interest and qualification based recommendation system</p>
+                    <ul>
+                        <li>Login own account show according to your give data Recommendation</li>
+                    </ul>
+                    <a class="reg" href="{% url 'register' %}">Register</a>
+                </div>
+               
+            </div>
+
+          
+    
+            <!-- Job Listings -->
+            <div class="col-md-9">
+                <div class="row">
+                    {% for job in jobs %}
+                    <div class="col-md-6 mb-4">
+                        <div class="list-group shadow bg-light">
+                            <div class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <h5 class="mb-0 badge badge-primary">{{ job.title }}</h5>
+                            </div>
+                            <div class="list-group-item list-group-item-action d-flex align-items-center">
+                                {% if job.image %}
+                                <img src="{{ job.image.url }}" class="job-img me-3" alt="{{ job.title }}">
+                                {% endif %}
+                                <div>
+                                    <div class="">
+                                        <small class="text-secondary">Uploaded: {{ job.created_at|date:"F j, Y" }}</small><br>
+                                        <small class="text-secondary">Deadline: {{ job.deadline|date:"F j, Y" }}</small><br>
+                                        <small class="text-primary">Salary: {{ job.salary }}</small><hr>
+                                    </div>
+
+                                    <a href="{% url 'job_detail' job.id %}" class="btn btn-primary btn-sm position-relative">Details
+                                        <span class="position-absolute top-0 start-100 translate-middle badge bg-success">
+                                            {{ job.location }}
+                                            <span class="visually-hidden">unread</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

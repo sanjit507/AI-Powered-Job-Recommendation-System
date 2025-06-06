@@ -1,0 +1,626 @@
+ /* Main Container Styles */
+ .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    
+  }
+
+  
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
+    color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    margin: 2rem 0;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 12px 20px;
+    padding-left: 50px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .search-bar input:focus {
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+  }
+  
+  
+  /* Image Slider */
+  .team-slider {
+    padding: 5px 0;
+  }
+  
+  .team-slider .slide {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+  }
+  
+  .team-slider .slide:hover {
+    transform: translateY(-3px);
+  }
+  
+  .team-slider img {
+    width: 100%;
+    height: 200px; /* Reduced height */
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .swiper-button-next, .swiper-button-prev {
+    color: #007bff;
+    background: rgba(255,255,255,0.7);
+    width: 15px; /* Reduced size */
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  
+  .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 1rem; /* Reduced font size */
+  }
+  
+  
+
+  .job-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+  }
+  
+  .text-secondary {
+    color: #6c757d !important;
+  }
+  
+  .btn-sm {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+  
+  .position-relative {
+    overflow: visible;
+  }
+  
+  .translate-middle {
+    transform: translate(-50%, -50%);
+  }
+  
+  .bg-success {
+    background-color: #28a745 !important;
+    font-size: 0.6rem;
+    padding: 3px 6px;
+  }
+  
+  /* Empty State */
+  .alert-info {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    border-radius: 10px;
+  }
+  
+  .fa-info-circle {
+    color: #007bff;
+  }
+  
+ 
+
+
+
+  .side-menu {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 320px;
+    margin: 20px;
+}
+
+.side-menu h5 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eaeaea;
+}
+
+.intro {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.feature-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.feature-card.highlighted {
+    border-left: 4px solid #3498db;
+}
+
+.feature-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.feature-benefit {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.feature-list {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.feature-list li {
+    color: #34495e;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.reg-btn {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.reg-btn:hover {
+    background: #2980b9;
+}
+  
+  
+  /* Custom Styles */
+  footer {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    padding: 40px 0;
+  }
+  
+  /* Background Animation */
+  @keyframes moveBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+  }
+  
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
+    z-index: -1;
+    animation: moveBackground 10s infinite;
+  }
+  
+  /* Social Icons Hover Effect */
+  .social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+    transform: translateY(-5px);
+    color: #ffdd57;
+  }
+  
+  /* Newsletter Form */
+  .newsletter-form .form-control {
+    border-radius: 25px;
+    border: none;
+    padding: 10px 20px;
+  }
+  
+  .newsletter-form .btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    background-color: #ffdd57;
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .newsletter-form .btn:hover {
+    background-color: #ffcc00;
+  }
+  
+  /* Footer Links */
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #ffdd57;
+  }
+  
+  /* Copyright Section */
+  .copyright {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+    margin-top: 20px;
+  }
+  
+  /* End */
+  
+  /* Keyframe for infinite underline animation */
+  @keyframes infiniteUnderline {
+    0% {
+      width: 0;
+      background-color: #0072ff;
+    }
+    50% {
+      width: 100%;
+      background-color: #00c6ff;
+    }
+    100% {
+      width: 0;
+      background-color: #0072ff;
+    }
+  }
+  
+  /* Main styling for the title with the animated underline */
+  .animated-title12 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    padding: 15px 0;
+    margin: 30px auto;
+    position: relative;
+    width: fit-content;
+    background: linear-gradient(90deg, #0072ff, #00c6ff, #0072ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: 
+      fadeInTitle 1.5s ease-out; /* Fade-in effect for the text */
+    transition: all 0.4s ease;
+  }
+  
+  /* Underline animation */
+  .animated-title12::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Start with no width */
+    height: 3px;
+    background-color: #0072ff;
+    animation: infiniteUnderline 3s ease-in-out infinite; /* Infinite underline animation */
+    border-radius: 2px;
+  }
+  
+  /* Keyframe for fade-in text animation */
+  @keyframes fadeInTitle {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Hover effects */
+  .animated-title12:hover {
+    transform: translateY(-3px);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  .animated-title12:hover::after {
+    background-color: #00c6ff; /* Change color of the underline on hover */
+  }
+  
+ 
+  
+  
+  
+  /* 🆕 Typing Effect for Announcements */
+.announcement1 {
+  display: block; /* Ensures it behaves properly */
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid white; /* Creates a caret effect */
+  animation: typing 7s steps(40, end) infinite alternate, blink-caret 0.9s step-end infinite;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: rgb(0, 0, 0);
+  margin: 10px auto; /* Centers the text */
+  
+  max-width: 100%; /* Prevents expanding too much */
+  width: fit-content; /* Ensures text fits properly */
+  text-align: center;
+  
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+  font-family: 'Arial', sans-serif;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+  background: linear-gradient(90deg, #ff0080, #ff8c00);
+  background-clip: text;
+  -webkit-background-clip: text;
+  padding: 5px 20px;
+  box-sizing: border-box;
+}
+
+/* 💡 Hover Effects */
+.announcement1:hover {
+  color: #f0f0f0;
+  transform: scale(1.05); /* Subtle scaling */
+}
+
+/* ✨ Glowing Text Effect */
+.announcement1 span {
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+  transition: text-shadow 0.3s ease;
+}
+
+.announcement1:hover span {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+/* 🎭 Keyframe: Typewriter Effect */
+@keyframes typing {
+  0% {
+      width: 0;
+  }
+  100% {
+      width: 100%;
+  }
+}
+
+/* 🖱️ Blinking Caret */
+@keyframes blink-caret {
+  50% {
+      border-color: transparent;
+  }
+}
+
+ 
+
+   
+/* 💼 Job Card with Glassmorphism */
+.job-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎨 Header Styling */
+.job-header {
+  background: linear-gradient(135deg, #007bff, #003580);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 15px 15px 0 0;
+}
+
+/* 📄 Job Description */
+.job-description {
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 15px;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.job-description:hover {
+  transform: scale(1.02);
+}
+
+/* 📌 List Group Enhancements */
+.list-group-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-left: 5px solid #007bff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.02);
+}
+
+/* 🚀 Apply & Action Buttons */
+.btn-success, .btn-primary {
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover, .btn-primary:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* ⚠️ Warning Alert */
+.alert-warning {
+  background: linear-gradient(135deg, #ffcc00, #ff9900);
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
+  padding: 12px;
+}
+
+/* 🔍 Related & Recommended Jobs */
+.related-jobs {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+/* 📃 Job Listings */
+.job-list {
+  list-style: none;
+  padding: 0;
+}
+
+.job-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* 🖼 Job Image */
+.job-img {
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 🏷 Job Titles */
+.job-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.job-location, .job-company {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .job-item {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .job-card {
+      padding: 15px;
+  }
+}
+
+
+.google-btn:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.divider-line:not(:empty)::after {
+    margin-left: .75em;
+}
+
+.btn-outline-primary {
+  border-width: 2px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4361ee;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+}
+
+
+
+
+
+
+
+
+
+

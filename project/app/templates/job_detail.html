@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ job.title }}
+{% endblock %}
+
+{% block content %}
+<br>
+
+<br>
+
+    <div class="card bg-light">
+        <div class="card-header bg-light text-primary">
+            <h4 class="card-title mb-0">{{ job.title }}</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="card-text alert alert-info">{{ job.description }}</p>
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <strong>Company:</strong> {{ job.company }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Location:</strong> {{ job.location }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Category:</strong> {{ job.category }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Created Date:</strong> {{ job.created_date }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Deadline:</strong> {{ job.deadline }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Salary:</strong> {{ job.salary }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Requirements:</strong> {{ job.requirements }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Responsibilities:</strong> {{ job.responsibilities }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Contact Email:</strong> {{ job.contact_email }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Required Skills:</strong> {{ job.required_skills }}
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Education Level:</strong> {{ job.education_level }}
+                        </div>
+                    </div>
+
+                    <!-- Apply Buttons Section -->
+                    <div class="mt-3">
+                        {% if job.apply_link %}
+                            <!-- Apply via External Link Button -->
+                            <a href="{{ job.apply_link }}" target="_blank" class="btn btn-success btn-sm w-100 mb-2">
+                                Apply Now
+                            </a>
+                        {% endif %}
+
+                        <!-- Apply via Platform Button -->
+                        {% if user.is_authenticated %}
+                            <form method="post" action="{% url 'apply_for_job' job.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    Apply via Platform
+                                </button>
+                            </form>
+                        {% else %}
+                            <p class="alert alert-warning">You need to <a href="{% url 'login' %}">login</a> to apply for this job.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Similar Jobs, Recommended Jobs, Predicted Jobs, and NLP Similar Jobs Sections -->
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <div class="card-body">
+                            <div class="mt-4">
+                                <h2 class="mb-3">Similar Jobs</h2>
+                                <div class="table-responsive">
+                                    <ul class="list-group list-group-horizontal">
+                                        {% for similar_job in similar_jobs %}
+                                            <li class="list-group-item d-flex align-items-center bg-white">
+                                                {% if similar_job.image %}
+                                                    <img src="{{ similar_job.image.url }}" class="job-img" alt="Job Image">
+                                                {% endif %}
+                                                <div>
+                                                    <h6 class="text-uppercase text-primary">{{ similar_job.title }}</h6>
+                                                    <p class="text-warning">{{ similar_job.location }}</p>
+                                                    <a href="{% url 'job_detail' similar_job.id %}" class="badge badge-primary p-2">Details</a>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h2 class="mb-3">Jobs you might be interested in </h2>
+                                <div class="table-responsive">
+                                    <ul class="list-group list-group-horizontal">
+                                        {% for recommended_job in recommended_jobs %}
+                                            <li class="list-group-item d-flex align-items-center bg-white">
+                                                {% if recommended_job.image %}
+                                                    <img src="{{ recommended_job.image.url }}" class="job-img" alt="Job Image">
+                                                {% endif %}
+                                                <div>
+                                                    <h5>{{ recommended_job.title }}</h5>
+                                                    <p>{{ recommended_job.company }}</p>
+                                                    <a href="{% url 'job_detail' recommended_job.id %}" class="badge badge-primary p-2">Details</a>
+                                                </div>
+                                            </li>
+                                        {% empty %}
+                                            <li class="list-group-item">No recommended jobs available at the moment.</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+
+                          
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

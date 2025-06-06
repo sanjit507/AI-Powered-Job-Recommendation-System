@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Company Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-lg rounded-4 border-0 px-4 py-5 bg-light">
+        <div class="text-center mb-4">
+            <img src="https://img.icons8.com/fluency/96/company.png" alt="Company Icon" class="mb-3">
+            <h2 class="fw-bold">Welcome, {{ request.user.username }}</h2>
+            <p class="text-muted">Here is your company profile overview</p>
+        </div>
+        <hr>
+
+        <div class="row gx-5">
+            <div class="col-md-6 mb-4">
+                <div class="border-start border-primary ps-3">
+                    <h6 class="text-uppercase text-muted small">Company Name</h6>
+                    <p class="fs-5 fw-semibold">{{ company_profile.company_name }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="border-start border-success ps-3">
+                    <h6 class="text-uppercase text-muted small">Email</h6>
+                    <p class="fs-5 fw-semibold">{{ company_profile.email }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="border-start border-warning ps-3">
+                    <h6 class="text-uppercase text-muted small">Website</h6>
+                    <p class="fs-5 fw-semibold">
+                        <a href="{{ company_profile.website }}" class="text-decoration-none text-primary" target="_blank">
+                            {{ company_profile.website }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="border-start border-info ps-3">
+                    <h6 class="text-uppercase text-muted small">Industry</h6>
+                    <p class="fs-5 fw-semibold">{{ company_profile.industry }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="border-start border-dark ps-3">
+                    <h6 class="text-uppercase text-muted small">Location</h6>
+                    <p class="fs-5 fw-semibold">{{ company_profile.location }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

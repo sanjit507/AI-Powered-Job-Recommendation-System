@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block title %}
+    Edit Profile
+{% endblock %}
+    
+<br>
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Edit Your Profile</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        <!-- Profile Picture Section -->
+                        <div class="text-center">
+                            <label for="id_avatar" style="cursor: pointer;" aria-label="Upload Profile Picture">
+                                {% if profile.avatar %}
+                                    <img src="{{ profile.avatar.url }}" id="avatar-preview-img" class="img-fluid profile-img rounded-circle" alt="Uploaded Profile Picture">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/150" id="avatar-preview-img" class="img-fluid profile-img rounded-circle" alt="Default Profile Picture">
+                                {% endif %}
+                            </label>
+                            <input type="file" name="avatar" id="id_avatar" class="d-none" accept="image/*">
+                            <button type="button" class="btn-upload" onclick="document.getElementById('id_avatar').click();" aria-label="Upload Profile Picture">
+                                Upload Profile Picture 
+                            </button>
+                        </div>
+
+                        <!-- Resume Section -->
+                        <div class="form-group mt-4">
+                            <label for="id_resume" class="form-label">Upload Resume </label>
+                            <div class="file-preview">
+                                {% if profile.resume %}
+                                    <p>Current Resume: <a href="{{ profile.resume.url }}" target="_blank">Download</a></p>
+                                {% else %}
+                                    <p>No resume uploaded yet.</p>
+                                {% endif %}
+                                <div id="resume-preview-container">
+                                    <div id="resume-doc-icon" class="doc-icon d-none"></div>
+                                    <p id="resume-file-name" class="file-name d-none"></p>
+                                </div>
+                            </div>
+                            <input type="file" name="resume" id="id_resume" class="d-none" accept=".pdf,.doc,.docx">
+                            <button type="button" class="btn-upload" onclick="document.getElementById('id_resume').click();" aria-label="Upload Resume">
+                                Upload Resume 
+                            </button>
+                            <small class="text-muted d-block mt-2">Upload a new resume (PDF or DOCX)</small>
+                        </div>
+
+                        <!-- Other Profile Fields -->
+                        <div class="form-group">
+                            {{ form.location.label_tag }}
+                            {{ form.location }}
+                            {{ form.location.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.category.label_tag }}
+                            {{ form.category }}
+                            {{ form.category.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.qualifications.label_tag }}
+                            {{ form.qualifications }}
+                            {{ form.qualifications.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.interests.label_tag }}
+                            {{ form.interests }}
+                            {{ form.interests.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.skills.label_tag }}
+                            {{ form.skills }}
+                            {{ form.skills.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.education_level.label_tag }}
+                            {{ form.education_level }}
+                            {{ form.education_level.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Update Profile</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small>Go back to your <a href="{% url 'profile' %}">Profile</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for File Previews and Validation -->
+<script>
+    // Avatar Preview with Loading Indicator
+    const avatarInput = document.getElementById('id_avatar');
+    const avatarPreviewImg = document.getElementById('avatar-preview-img');
+    avatarInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            avatarPreviewImg.src = "https://via.placeholder.com/150?text=Loading..."; // Show loading placeholder
+            reader.onload = (e) => {
+                avatarPreviewImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            avatarPreviewImg.src = "https://via.placeholder.com/150"; // Reset to default placeholder
+        }
+    });
+
+    // Resume Preview (File Name and Document Icon)
+    const resumeInput = document.getElementById('id_resume');
+    const resumeDocIcon = document.getElementById('resume-doc-icon');
+    const resumeFileName = document.getElementById('resume-file-name');
+    resumeInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Only PDF or DOCX files are allowed.');
+                resumeInput.value = ''; // Clear the input
+                resumeDocIcon.classList.add('d-none');
+                resumeFileName.classList.add('d-none');
+            } else {
+                // Show document icon and file name
+                resumeDocIcon.classList.remove('d-none');
+                resumeFileName.classList.remove('d-none');
+                resumeFileName.textContent = `Selected File: ${file.name}`;
+            }
+        } else {
+            // Hide document icon and file name if no file is selected
+            resumeDocIcon.classList.add('d-none');
+            resumeFileName.classList.add('d-none');
+        }
+    });
+</script>
+{% endblock %}

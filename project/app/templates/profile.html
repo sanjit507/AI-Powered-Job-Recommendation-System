@@ -1,0 +1,464 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    User Profile
+{% endblock %}
+
+{% block content %}
+<style>
+    .profile-container {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+    
+    .profile-section {
+        flex: 1;
+        min-width: 350px;
+    }
+    
+    .recommendations-section {
+        flex: 2;
+        min-width: 400px;
+    }
+    
+    .profile-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 5px solid #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        border: none;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+        padding: 15px 20px;
+    }
+    
+    .list-group-item {
+        padding: 12px 20px;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .list-group-item strong {
+        min-width: 120px;
+        display: inline-block;
+        color: #495057;
+    }
+    
+    .btn-actions {
+        background-color: #f8f9fa;
+        border-top: 1px solid #eee;
+        padding: 15px;
+    }
+    
+    .resume-link {
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .resume-link:hover {
+        text-decoration: underline;
+    }
+    
+    .no-resume {
+        color: #6c757d;
+        font-style: italic;
+    }
+    
+    .recommendations {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+    
+    .recommendations h4 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f1f1f1;
+    }
+    
+    .job-card {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .job-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .job-card h5 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+    
+    .job-card p {
+        margin-bottom: 5px;
+        color: #495057;
+    }
+    
+    .job-card p strong {
+        color: #2c3e50;
+    }
+    
+    .no-recommendations {
+        color: #6c757d;
+        font-style: italic;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .profile-container {
+            flex-direction: column;
+        }
+        
+        .profile-section, .recommendations-section {
+            min-width: 100%;
+        }
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="profile-container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">User Profile</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <!-- Profile Image -->
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" class="img-fluid profile-img rounded-circle" alt="Profile Picture">
+                        {% else %}
+                            <img src="https://via.placeholder.com/150" class="img-fluid profile-img rounded-circle" alt="Profile Picture">
+                        {% endif %}
+                    </div>
+                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                        <li class="list-group-item"><strong>First Name:</strong> {{ user.first_name|default:"Not specified" }}</li>
+                        <li class="list-group-item"><strong>Last Name:</strong> {{ user.last_name|default:"Not specified" }}</li>
+                        <li class="list-group-item"><strong>Location:</strong> {{ profile.location|default:"Not specified" }}</li>
+                        <li class="list-group-item"><strong>Category:</strong> {{ profile.category|default:"Not specified" }}</li>
+                        <li class="list-group-item"><strong>Interests:</strong> {{ profile.interests|default:"Not specified" }}</li>
+                        <li class="list-group-item"><strong>Skills:</strong> {{ profile.skills|default:"Not specified" }}</li>
+                        <li class="list-group-item"><strong>Education Level:</strong> {{ profile.education_level|default:"Not specified" }}</li>
+                        <li class="list-group-item">
+                            <strong>Resume:</strong>
+                            {% if profile.resume %}
+                                <a href="{{ profile.resume.url }}" class="resume-link" target="_blank">Download Resume</a>
+                            {% else %}
+                                <span class="no-resume">No resume uploaded</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center btn-actions">
+                    <a href="{% url 'edit_profile' %}" class="btn btn-primary me-2">Edit Profile</a>
+                    <a href="{% url 'password_change' %}" class="btn btn-secondary">Change Password</a>
+                </div>
+            </div>
+        </div>
+        
+      <!-- Recommendations Section -->
+<div class="recommendations-section">
+    <div class="recommendations">
+        <h4>Jobs you might be interested in</h4>
+        {% if recommended_jobs %}
+            {% for job in recommended_jobs %}
+                <div class="job-card">
+                    <h5>{{ job.title }}</h5>
+                    <p><strong>Company:</strong> {{ job.company }}</p>
+                    <p><strong>Location:</strong> {{ job.location }}</p>
+                    <p><strong>Category:</strong> {{ job.category }}</p>
+                    <p><strong>Skills Required:</strong> {{ job.required_skills }}</p>
+                    <a href="{% url 'job_detail' job_id=job.id %}" class="btn btn-sm btn-info">View Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-recommendations">No recommendations available at the moment.</p>
+        {% endif %}
+    </div>
+    <hr>
+
+    <h3 class="center-heading">Application Process</h3>
+    <div class="application-process">
+        <div class="process-step pending">Pending</div>
+        <div class="process-arrow">→</div>
+        <div class="step-with-branch">
+            <div class="process-step reviewed">Reviewed</div>
+            <div class="branch">
+                <div class="branch-arrow">🢃</div>
+                <div class="process-step rejected">Rejected</div>
+            </div>
+        </div>
+        <div class="process-arrow">→</div>
+        <div class="process-step accepted">Application Accepted</div>
+        <div class="process-arrow">→</div>
+        <div class="step-with-branch">
+            <div class="process-step interview">Interview Process</div>
+            <div class="branch">
+                <div class="branch-arrow">🢃</div>
+                <div class="process-step rejected">Rejected</div>
+            </div>
+        </div>
+        <div class="process-arrow">→</div>
+        <div class="process-step join">Join Company</div>
+    </div>
+    <hr>
+
+    <div class="applications-table-container">
+        {% if applications %}
+            <table class="applications-table">
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Status</th>
+                        <th>Applied On</th>
+                        <th>Interview Details</th> <!-- New column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                        <tr>
+                            <td class="job-title">{{ application.job.title }}</td>
+                            <td>
+                                <span class="status-badge status-{{ application.status|lower }}">
+                                    {{ application.get_status_display }}
+                                </span>
+                            </td>
+                            <td>{{ application.applied_on|date:"F j, Y" }}</td>
+                            <td>
+                                {% if application.status == 'INTERVIEW' %}
+                                    {% if application.interview_meeting_link %}
+                                        <p><strong>Link:</strong> 
+                                            <a href="{{ application.interview_meeting_link }}" target="_blank">Join Interview</a>
+                                        </p>
+                                    {% endif %}
+                                    {% if application.interview_message %}
+                                        <p><strong>Message:</strong> {{ application.interview_message }}</p>
+                                    {% endif %}
+                                {% else %}
+                                    <em>N/A</em>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="no-applications">
+                <p>No applications found.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+              
+              <style>
+                .applications-table-container {
+                  max-width: 100%;
+                  overflow-x: auto;
+                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  margin: 30px 0;
+                  padding: 0 10px;
+                }
+              
+                .applications-table {
+                  width: 100%;
+                  border-collapse: separate;
+                  border-spacing: 0;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                  border-radius: 8px;
+                  overflow: hidden;
+                }
+              
+                .applications-table th {
+                  background-color: #f1f3f5;
+                  padding: 14px 18px;
+                  text-align: left;
+                  font-weight: 600;
+                  color: #343a40;
+                  border-bottom: 2px solid #dee2e6;
+                  white-space: nowrap;
+                }
+              
+                .applications-table td {
+                  padding: 14px 18px;
+                  border-bottom: 1px solid #dee2e6;
+                  vertical-align: middle;
+                  color: #495057;
+                  background-color: #ffffff;
+                }
+              
+                .applications-table tr:hover {
+                  background-color: #f8f9fa;
+                  transition: background-color 0.2s ease-in-out;
+                }
+              
+                .job-title {
+                  font-weight: 600;
+                  color: #212529;
+                }
+              
+                .status-badge {
+                  display: inline-block;
+                  padding: 5px 10px;
+                  border-radius: 20px;
+                  font-size: 0.75rem;
+                  font-weight: 600;
+                  text-transform: capitalize;
+                  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                  min-width: 80px;
+                  text-align: center;
+                }
+              
+                /* Status colors */
+                .status-pending {
+                  background-color: #fff3cd;
+                  color: #856404;
+                }
+              
+                .status-reviewed {
+                  background-color: #cce5ff;
+                  color: #004085;
+                }
+              
+                .status-interview {
+                  background-color: #d4edda;
+                  color: #155724;
+                }
+              
+                .status-rejected {
+                  background-color: #f8d7da;
+                  color: #721c24;
+                }
+              
+                .status-accepted {
+                  background-color: #d1ecf1;
+                  color: #0c5460;
+                }
+              
+                .no-applications {
+                  text-align: center;
+                  padding: 40px 20px;
+                  background-color: #f1f3f5;
+                  border-radius: 10px;
+                  color: #6c757d;
+                  font-style: italic;
+                  font-size: 1rem;
+                }
+              
+               
+
+
+                .application-process {
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 15px;
+                  flex-wrap: wrap;
+                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  margin-bottom: 30px;
+                  margin-left: -100px;
+                 
+                }
+                
+                .process-step {
+                  padding: 8px 14px;
+                  border-radius: 20px;
+                  font-weight: 600;
+                  text-transform: capitalize;
+                  color: #fff;
+                  min-width: 100px;
+                  text-align: center;
+                  font-size: 0.9rem;
+                }
+                
+                .process-arrow {
+                  font-size: 1.2rem;
+                  color: #6c757d;
+                  margin-top: 12px;
+                }
+                
+                .step-with-branch {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  position: relative;
+                }
+                
+                .branch {
+                  margin-top: 5px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 5px;
+                }
+                
+                .branch-arrow {
+                  font-size: 1.1rem;
+                  color: #6c757d;
+                }
+
+                .center-heading {
+                  text-align: center;
+                  margin-bottom: 20px;
+                  font-size: 1.5rem;
+                }
+                
+
+                .process-step.join {
+                  background-color: #20c997;
+                }
+                
+                .center-heading {
+                  
+                  font-size: 1.5rem;
+                  margin-bottom: 25px;
+                  text-alien:center;
+                }
+                
+                
+                /* Status colors */
+                .process-step.pending { background-color: #ffc107; color: #212529; }
+                .process-step.reviewed { background-color: #17a2b8; }
+                .process-step.interview { background-color: #28a745; }
+                .process-step.accepted { background-color: #007bff; }
+                .process-step.rejected { background-color: #dc3545; }
+                .process-step.selection { background-color: #6f42c1; }
+                
+
+
+
+                
+
+
+
+              </style>
+        
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_filters %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'job_list' %}">Home</a>
+            <a class="nav-link text-white" href="https://remote-interview-platform-seven.vercel.app/">Interview </a>&nbsp;&nbsp;&nbsp;
+            <a class="nav-link text-white" href="https://ai-resume-builder-07.netlify.app/">AI Resume Builder</a>&nbsp;&nbsp;&nbsp;
+            <a class="nav-link text-white" href="{% url 'company_login' %}">As Recruiter </a> &nbsp;&nbsp;&nbsp;
+           <a class="nav-link text-white" href="{% url 'chat' %}">AI Interview Assistant </a> &nbsp;&nbsp;&nbsp;
+            
+            ;
+           
+            
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="nav-link">Logged in as [ {{ user.username }} ]</span>
+                        </li>
+                        {% if not user|has_company %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link" style="border: none; background: none; cursor: pointer;">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bg-light p-4">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="container p-4">
+        <section class="mb-4">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" class="btn btn-floating m-1" style="background-color: #3b5998;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #55acee;"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #dd4b39;"><i class="fab fa-google"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #ac2bac;"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #0082ca;"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #333333;"><i class="fab fa-github"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #ff4500;"><i class="fab fa-reddit-alien"></i></a>
+                <a href="#" class="btn btn-floating m-1" style="background-color: #25d366;"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </section>
+
+        <section class="mb-4">
+            <h3>Subscribe to Our Newsletter</h3>
+            <form class="newsletter-form">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-5 col-12">
+                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="mb-4">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Community</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Meetups</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> India, Bihar</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope"></i> carrerexpresssupp@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="copyright text-center p-3">
+        © 2025 CARRIER EXPRESS All rights reserved.
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-aTlYsCY27qWi0j3KOqjHnTOFnWVfK2VOzKoaIw7o4UjzA/Y6QlpKJFsaD9z7G3RS" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</body>
+</html>

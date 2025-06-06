@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.min.css" rel="stylesheet"/>
+<style>
+    .google-btn {
+        background-color: #db4437;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 4px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        text-decoration: none;
+    }
+
+    .google-btn:hover {
+        background-color: #c1351d;
+        color: white;
+    }
+
+    .divider {
+        text-align: center;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 40%;
+        height: 1px;
+        background: #ccc;
+    }
+
+    .divider::before {
+        left: 0;
+    }
+
+    .divider::after {
+        right: 0;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h5 class="card-title mb-0">Login</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_username">Username:</label>
+                            <input type="text" name="username" class="form-control" id="id_username" required>
+                            {% if form.username.errors %}
+                                <small class="text-danger">{{ form.username.errors }}</small>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password">Password:</label>
+                            <input type="password" name="password" class="form-control" id="id_password" required>
+                            {% if form.password.errors %}
+                                <small class="text-danger">{{ form.password.errors }}</small>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                    </form>
+
+                    <div class="divider">or</div>
+
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="google-btn">
+                        <i class="fab fa-google mr-2"></i> Continue with Google
+                    </a>
+                </div>
+                <div class="card-footer text-center">
+                    <small>Don't have an account? <a href="{% url 'register' %}">Register here</a></small>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
