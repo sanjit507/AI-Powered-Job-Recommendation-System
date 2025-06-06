@@ -100,6 +100,7 @@ Member	Role
 Sanjit Chaudhary	Job Recommendation & Interview Assistant
 Hemant Patel	AI Resume Builder
 Vikram Kumar & Ayaz	Interview Application
+
 Project Guide: Dr. Sakshiwala (Asst. Prof., NCE Chandi)
 
 🔮 Future Work
