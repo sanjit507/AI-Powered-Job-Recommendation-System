@@ -93,7 +93,9 @@ Schedule Interviews: Send automated invites with video links.
 Component	Accuracy	Dataset Size
 Job Recommendation (BERT)	85.17%	27,000 entries
 Interview Assistant (GPT)	98.88%	Custom text data
+
 👥 Team Contributions
+
 Member	Role
 Sanjit Chaudhary	Job Recommendation & Interview Assistant
 Hemant Patel	AI Resume Builder
