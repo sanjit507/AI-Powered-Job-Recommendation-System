@@ -61,7 +61,7 @@ Google Gemini API, Google Meet API, Clerk (authentication), Convex (backend)
 
 🚀 Installation & Setup
 Prerequisites
-Python 3.8+, Node.js 16+, pip, npm
+Python 3.8+
 
 cd backend  
 pip install -r requirements.txt  
