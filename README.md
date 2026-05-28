@@ -3,7 +3,27 @@ An End-to-End AI Platform for Smart Recruitment
 Integrating Job Recommendation, Resume Building, and Interview Assistance, Meeting Platform
 
 📌 Project Overview
+<img width="1361" height="695" alt="image" src="https://github.com/user-attachments/assets/6b85a770-010f-4d85-933a-1ce9de3499aa" />
+
+
+
 This platform revolutionises traditional recruitment by leveraging AI to streamline the entire hiring lifecycle. It connects job seekers with relevant opportunities, automates resume creation, offers interview preparation, and facilitates seamless video interviews—all in one place.
+
+<img width="1121" height="637" alt="image" src="https://github.com/user-attachments/assets/d058c826-7f71-4cd9-8be2-bcac3bb59ea0" />
+
+<img width="1143" height="590" alt="image" src="https://github.com/user-attachments/assets/30e97339-be18-47f4-87c6-1f586b32c864" />
+
+
+
+<img width="1141" height="636" alt="image" src="https://github.com/user-attachments/assets/3f18e254-e597-40f2-bbf7-1c61dfb3f912" />
+
+<img width="1131" height="633" alt="image" src="https://github.com/user-attachments/assets/d70bc233-2cea-4ac1-8a22-37c257bff899" />
+
+
+<img width="1120" height="607" alt="image" src="https://github.com/user-attachments/assets/8bd7e179-100d-4796-9a4a-46eddfbcc579" />
+
+
+
 
 Key Problems Solved:
 
